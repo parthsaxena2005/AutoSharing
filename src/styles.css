@@ -1980,3 +1980,452 @@
     font-size: 18px;
   }
 }
+
+
+
+/* --- Responsive: Always show illustration above form on mobile/tablet --- */
+@media (max-width: 1024px) {
+  .hero-content {
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 1.5rem 0.5rem;
+    gap: 1.5rem;
+    min-height: 100vh;
+    height: auto;
+  }
+  .illustration-container {
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 350px;
+    margin: 0 auto 1rem auto;
+    order: -1;
+  }
+  .hero-illustration {
+    width: 100%;
+    max-width: 320px;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+  }
+  .form-container {
+    width: 100% !important;
+    max-width: 420px;
+    min-width: 0;
+    margin: 0 auto;
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+    padding: 1.5rem 1rem;
+    position: relative;
+    z-index: 2;
+  }
+  .main-title {
+    font-size: 2rem;
+    margin-top: 0.5rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    color: var(--orangish-black);
+    z-index: 2;
+    position: relative;
+  }
+  .hero-background {
+    display: none !important;
+  }
+}
+
+/* --- Mobile: further reduce padding/gaps, ensure heading is visible --- */
+@media (max-width: 600px) {
+  .hero-content {
+    padding: 0.5rem 0.2rem;
+    gap: 1rem;
+  }
+  .illustration-container {
+    max-width: 95vw;
+    margin-bottom: 0.5rem;
+  }
+  .hero-illustration {
+    max-width: 90vw;
+  }
+  .form-container {
+    padding: 1rem 0.5rem;
+    border-radius: 10px;
+  }
+  .main-title {
+    font-size: 1.5rem;
+    margin-top: 0.2rem;
+    margin-bottom: 1rem;
+  }
+}
+
+/* --- Always show heading and illustration --- */
+.form-container, .main-title {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+@media (max-width: 600px) {
+  .form-container {
+    position: relative;
+    z-index: 1;
+  }
+  .form-container::before {
+    content: '';
+    position: absolute;
+    top: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 180px;
+    height: 180px;
+    opacity: 0.10;
+    z-index: 0;
+    background: url('https://api.builder.io/api/v1/image/assets/TEMP/40f1fac5188cb00e07ff4d63fcc334a6a93b0f74?width=1258') no-repeat center/contain;
+    pointer-events: none;
+  }
+  .main-title {
+    position: relative;
+    z-index: 2;
+  }
+}
+/* Make the main app, body, and html always fill the viewport and be scrollable */
+html, body, #app {
+  height: 100%;
+  min-height: 100vh;
+  width: 100vw;
+  overflow: auto !important;
+  box-sizing: border-box;
+}
+
+/* Always make main page containers scrollable */
+.hero-container,
+.travel-page,
+.travel-form-page,
+.pickup-container {
+  min-height: 100vh;
+  max-height: 100vh;
+  overflow-y: auto !important;
+  overflow-x: hidden;
+  width: 100vw;
+  box-sizing: border-box;
+}
+
+/* Make main content areas scrollable if needed */
+.hero-content,
+.travel-content,
+.travel-form-content,
+.pickup-content {
+  min-height: 0;
+  max-height: 100vh;
+  overflow-y: auto !important;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Make forms and ride lists scrollable */
+.signup-form,
+.signin-form,
+.pickup-form,
+.rides-list {
+  max-height: 70vh;
+  min-height: 0;
+  overflow-y: auto !important;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Make modals scrollable */
+.map-modal-content,
+.time-picker-content {
+  max-height: 90vh;
+  overflow-y: auto !important;
+  min-width: 0;
+}
+
+/* Always show scrollbars for all elements */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #e5e7eb #f3f4f6;
+}
+
+/* Webkit scrollbar styling for all scrollable elements */
+::-webkit-scrollbar {
+  width: 8px;
+  background: #f3f4f6;
+}
+::-webkit-scrollbar-thumb {
+  background: #e5e7eb;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #d1d5db;
+}
+
+/* --- Small screens: use illustration as a dim background, remove from content flow --- */
+@media (max-width: 700px) {
+  /* Hide the illustration in the content */
+  .illustration-container,
+  .illustration-section,
+  .pickup-illustration-section {
+    display: none !important;
+  }
+
+  /* Add the illustration as a faded background to the main container */
+  .hero-container,
+  .travel-page,
+  .travel-form-page,
+  .pickup-container {
+    position: relative;
+    background: #fff;
+    min-height: 100vh;
+    overflow-y: auto !important;
+  }
+  .hero-container::before,
+  .travel-page::before,
+  .travel-form-page::before,
+  .pickup-container::before {
+    content: '';
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 80vw;
+    max-width: 400px;
+    height: 80vw;
+    max-height: 400px;
+    transform: translate(-50%, -50%);
+    z-index: 0;
+    opacity: 0.10;
+    pointer-events: none;
+    background: url('https://api.builder.io/api/v1/image/assets/TEMP/40f1fac5188cb00e07ff4d63fcc334a6a93b0f74?width=800') no-repeat center/contain;
+  }
+
+  /* Make sure content is above the background image */
+  .hero-content,
+  .travel-content,
+  .travel-form-content,
+  .pickup-content,
+  .form-container,
+  .form-wrapper {
+    position: relative;
+    z-index: 1;
+    background: transparent;
+    box-shadow: none;
+  }
+
+  /* Remove nested scrolls, allow only page scroll */
+  .hero-content,
+  .travel-content,
+  .travel-form-content,
+  .pickup-content,
+  .form-container,
+  .form-wrapper,
+  .signup-form,
+  .signin-form,
+  .pickup-form,
+  .rides-list {
+    max-height: none !important;
+    overflow: visible !important;
+  }
+
+  /* Adjust padding and centering for mobile */
+  .hero-content,
+  .travel-content,
+  .travel-form-content,
+  .pickup-content {
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 1.2rem 0.5rem;
+    gap: 1.2rem;
+    min-height: 100vh;
+    height: auto;
+  }
+  .form-container {
+    width: 100% !important;
+    max-width: 420px;
+    min-width: 0;
+    margin: 0 auto;
+    padding: 1.5rem 0.5rem;
+    border-radius: 12px;
+    background: rgba(255,255,255,0.95);
+    box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+  }
+  .main-title, .travel-title, .section-title {
+    font-size: 1.5rem;
+    margin-top: 0.5rem;
+    margin-bottom: 1rem;
+    text-align: center;
+    color: var(--orangish-black);
+    z-index: 2;
+    position: relative;
+  }
+  .hero-background {
+    display: none !important;
+  }
+}
+
+/* --- Small screens: center content, single background image, scrollable sign in form --- */
+@media (max-width: 700px) {
+  /* Remove illustration from content flow */
+  .illustration-container,
+  .illustration-section,
+  .pickup-illustration-section {
+    display: none !important;
+  }
+
+  /* Add a single, dimmed background image centered behind content */
+  .hero-container {
+    position: relative;
+    background: #fff;
+    min-height: 100vh;
+    overflow-y: auto !important;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .hero-container::before {
+    content: '';
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 80vw;
+    max-width: 350px;
+    height: 80vw;
+    max-height: 350px;
+    transform: translate(-50%, -50%);
+    z-index: 0;
+    opacity: 0.10;
+    pointer-events: none;
+    background: url('https://api.builder.io/api/v1/image/assets/TEMP/40f1fac5188cb00e07ff4d63fcc334a6a93b0f74?width=800') no-repeat center/contain;
+  }
+
+  /* Center all text and form content */
+  .hero-content {
+    position: relative;
+    z-index: 1;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    min-height: 100vh;
+    padding: 1.2rem 0.5rem;
+    gap: 1.2rem;
+    text-align: center;
+  }
+  .form-container, .form-wrapper {
+    width: 100% !important;
+    max-width: 420px;
+    min-width: 0;
+    margin: 0 auto;
+    padding: 1.5rem 0.5rem;
+    border-radius: 12px;
+    background: rgba(255,255,255,0.97);
+    box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .main-title {
+    font-size: 1.5rem;
+    margin-top: 0.5rem;
+    margin-bottom: 1rem;
+    text-align: center;
+    color: var(--orangish-black);
+    z-index: 2;
+    position: relative;
+  }
+  .hero-background {
+    display: none !important;
+  }
+
+  /* Make the sign in form scrollable if content overflows */
+  .signin-form {
+    max-height: 60vh;
+    overflow-y: auto !important;
+    width: 100%;
+    margin: 0 auto;
+    box-sizing: border-box;
+    background: transparent;
+  }
+  /* Always show a styled scrollbar for the form */
+  .signin-form::-webkit-scrollbar {
+    width: 8px;
+    background: #f3f4f6;
+  }
+  .signin-form::-webkit-scrollbar-thumb {
+    background: #e5e7eb;
+    border-radius: 4px;
+  }
+  .signin-form::-webkit-scrollbar-thumb:hover {
+    background: #d1d5db;
+  }
+  .signin-form {
+    scrollbar-width: thin;
+    scrollbar-color: #e5e7eb #f3f4f6;
+  }
+}
+
+/* For small screens: place the dimmed image as a background inside the form container */
+@media (max-width: 700px) {
+  .form-container {
+    position: relative;
+    background: rgba(255,255,255,0.97);
+    overflow: hidden;
+  }
+  .form-container::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 80%;
+    max-width: 260px;
+    height: 80%;
+    max-height: 260px;
+    transform: translate(-50%, -50%);
+    z-index: 0;
+    opacity: 0.13;
+    pointer-events: none;
+    background: url('https://api.builder.io/api/v1/image/assets/TEMP/40f1fac5188cb00e07ff4d63fcc334a6a93b0f74?width=800') no-repeat center/contain;
+  }
+  .form-wrapper, .main-title, .signin-form, .signup-form {
+    position: relative;
+    z-index: 1;
+    background: transparent;
+  }
+} 
+
+/* For small screens: make the dimmed background image inside the form container bigger */
+@media (max-width: 700px) {
+  .form-container {
+    position: relative;
+    z-index: 1;
+    overflow: visible;
+  }
+  .form-container::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 120%;
+    max-width: 420px;
+    height: 120%;
+    max-height: 420px;
+    transform: translate(-50%, -50%);
+    z-index: 0;
+    opacity: 0.16;
+    pointer-events: none;
+    background: url('https://api.builder.io/api/v1/image/assets/TEMP/40f1fac5188cb00e07ff4d63fcc334a6a93b0f74?width=1258') no-repeat center/contain;
+  }
+  .form-wrapper,
+  .signin-form,
+  .signup-form {
+    position: relative;
+    z-index: 1;
+    background: transparent;
+  }
+}
+
